@@ -1,0 +1,101 @@
+basePath: /
+definitions:
+  response.AddCurrency:
+    properties:
+      status:
+        additionalProperties: true
+        type: object
+    type: object
+  response.DeleteCurrency:
+    properties:
+      status:
+        additionalProperties: true
+        type: object
+    type: object
+  response.GetCurrencyPrice:
+    properties:
+      coin:
+        type: string
+      status:
+        additionalProperties: true
+        type: object
+      timestamp:
+        type: integer
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact: {}
+  title: Тестовое задание
+  version: 0.0.1
+paths:
+  /api/v1/currency/add/{coin}:
+    get:
+      consumes:
+      - application/json
+      description: adds currency for observing
+      parameters:
+      - description: Coin Name
+        in: path
+        name: coin
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.AddCurrency'
+      summary: adds currency for observing
+      tags:
+      - currency
+  /api/v1/currency/price/{coin}/{timestamp}:
+    get:
+      consumes:
+      - application/json
+      description: get currency price by timestamp
+      parameters:
+      - description: Coin Name
+        in: path
+        name: coin
+        required: true
+        type: string
+      - description: Timestamp
+        in: path
+        name: timestamp
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.GetCurrencyPrice'
+      summary: get currency price
+      tags:
+      - currency
+  /api/v1/currency/remove/{coin}:
+    get:
+      consumes:
+      - application/json
+      description: get recommendations by user id
+      parameters:
+      - description: Coin Name
+        in: path
+        name: coin
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.DeleteCurrency'
+      summary: delete currency from observing
+      tags:
+      - currency
+swagger: "2.0"
